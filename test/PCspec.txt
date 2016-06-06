@@ -1,0 +1,6 @@
+PCスペック
+
+●CPU: AMD A8-3520M APU with Radeon(tm) HD Graphics 1.60 GHz 
+●メモリ: 8.00 GB
+●ハードディスク: 512 GB
+●OS: windows 7 64 bit
