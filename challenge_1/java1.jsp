@@ -55,7 +55,7 @@
         <p>
         <%  
             // 課題7
-            String category1 = "１：雑貨";
+            String category1 = request.getParameter("category1");
             String amount1 = request.getParameter("amount1");
             String num1 = request.getParameter("num1");
             int total_amount1 = Integer.parseInt(amount1);
@@ -71,7 +71,7 @@
             }
         %></p>
         <p><% 
-            String category2 = "２：生鮮食品";
+            String category2 = request.getParameter("category2");
             String amount2 = request.getParameter("amount2");
             String num2 = request.getParameter("num2");
             int total_amount2 = Integer.parseInt(amount2);
@@ -87,7 +87,7 @@
             }
             %></p>
         <p><%
-            String category3 = "３：その他";
+            String category3 = request.getParameter("category3");
             String amount3 = request.getParameter("amount3");
             String num3 = request.getParameter("num3");
             int total_amount3 = Integer.parseInt(amount3);
