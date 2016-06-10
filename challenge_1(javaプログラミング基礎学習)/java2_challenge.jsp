@@ -104,45 +104,31 @@
                 out.println(hMap);
              %></p>
             
-            <p><%    
-                // 課題10
-                int m = 177;
-                out.print("元の値: " + m + " ");
-                // 2 で割れるだけ割り算する
-                out.print("素数: ");
-                while(m % 2 == 0){
-                  out.print(2);
-                  out.print(" ");
-                  m /= 2;
-                }
-                // 3, 5, 7で割り算していく                
-                for(int i = 3; i < 8; i += 2){
-                  while(m % i == 0){
-                    out.print(i + " ");
-                    m /= i;
-                  }
-                }
-                if(m > 1) {
-                    out.println("その他: " + m);
-                }                  
-                %></p>
-            
             <p><%
-                // 課題10 別解
-                int hoge = 37;
+                // 課題10 
+                int hoge = 25;
+                int k = 0;
                 out.print("元の値: " + hoge + " ");
                 int numArray[] = {2,3,5,7};
                 out.print("素数: ");
                 for (int i=0;i<numArray.length;i++) {
+                  // 素数なら割って、カウントをプラス1を繰り返す
                   while(hoge % numArray[i] == 0) {
-                      out.print(numArray[i] + " ");
                       hoge /= numArray[i];
-                  }
+                      k++;
+                  }   
+                      // カウントがゼロなら処理をせずに次のループへ飛ばす
+                      if (k == 0) {
+                          continue;
+                      } else {
+                          out.print(numArray[i] +"で"+  k + "回割れる ");   
+                      }
+                      // カウントを0に戻す
+                      k = k - k;
                 }
                 if (hoge > 1){
                     out.print("その他: " + hoge);
                 }
-
             %></p>
     </body>
 </html>
