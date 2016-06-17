@@ -1,0 +1,47 @@
+// ‰Û‘è1
+create table profiles(profilesID int, name varchar(255), tell(varchar(255), age int , birthday date);
+insert into profiles(profilesID, name, tell, age, birthday) values(1, '“c’†À', '012-345-6789', 30, '1994-02-01'),
+(2, '—é–Ø–Î', '090-1122-3344', 37, '1987-08-12'), (3, '—é–ØÀ', '080-5566-7788', 24, '2000-12-24'),
+(4, '²“¡´', '012-0987-6543', 19, '2005-08-01'), (5, '‚‹´´', '090-9900-1234', 24, '2000-12-24');
+
+// ‰Û‘è2
+select * from profiles where profilesID=3;
+
+// ‰Û‘è3
+select * from profiles where name='‚‹´´';
+
+// ‰Û‘è4
+select * from profiles where age=24;
+
+// ‰Û‘è5
+select * from profiles where age>=25;
+
+// ‰Û‘è6
+select * from profiles where name like '%À';
+
+// ‰Û‘è7
+update profiles set name='‹g“c–Î' where profilesID=2;
+select * from profiles where profilesID=2;
+
+// ‰Û‘è8
+delete from profiles where birthday='2000-12-24';
+select * from profiles;
+
+// ‰Û‘è9
+create table department(departmentID int, departmentName varchar(255), PRIMARY KEY (departmentID));
+create table station(stationID int, stationName varchar(255), PRIMARY KEY (stationID));
+create table user(userID int, name varchar(255), tell varchar(255), age int, birthday date, departmentID int, stationID int, PRIMARY KEY (userID),
+FOREIGN KEY (departmentID) REFERENCES department(departmentID), FOREIGN KEY (stationID) REFERENCES station(stationID));
+
+insert into department(departmentID, departmentName) values(1, 'ŠJ”­•”'),(2,'‰c‹Æ•”'),(3,'‘–±•”');
+insert into station(stationID, stationName) values(1, '‹ã’i‰º'), (2, '‰i“c’¬'), (3,'a’J'), (4,'_•Û’¬'),(5,'ãˆä‘');
+insert into user(userID, name, tell, age, birthday, departmentID, stationID) values(1, '“c’†À', '012-345-6789', 30, '1994-02-01', 3, 4),
+(2, '—é–Ø–Î', '090-1122-3344', 37, '1987-08-12', 3, 4), (3, '—é–ØÀ', '080-5566-7788', 24, '2000-12-24', 2, 5),
+(4, '²“¡´', '012-0987-6543', 19, '2005-08-01', 1, 5), (5, '‚‹´´', '090-9900-1234', 24, '2000-12-24', 3, 5);
+
+select * from user;
+select * from department;
+select * from station;
+
+
+
