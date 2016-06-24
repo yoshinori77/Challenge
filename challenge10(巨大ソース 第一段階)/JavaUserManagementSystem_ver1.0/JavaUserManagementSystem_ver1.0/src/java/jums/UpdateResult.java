@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package jums;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author yoshi
  */
-public class jdbc_kadai9 extends HttpServlet {
+public class UpdateResult extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,20 +32,14 @@ public class jdbc_kadai9 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            // 課題9
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>jdbc 課題9</title>");            
+            out.println("<title>Servlet UpdateResult</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println(" <form action=\"./jdbc_kadai9.jsp\" method=\"post\">\n");
-            out.println("<br>" + "ID: " + "<p><input type=\"text\" name=\"txtID\"></p>\n");
-            out.println("<br>" + "名前: " + "<p><input type=\"text\" name=\"txtName\"></p>\n");
-            out.println("<br>" + "tell: " + "<p><input type=\"text\" name=\"txtTell\"></p>\n");
-            out.println("<br>" + "年齢: " + "<p><input type=\"text\" name=\"txtAge\"></p>\n");
-            out.println("<br>" + "誕生日: " + "<p><input type=\"text\" name=\"txtBirthday\"></p>\n");
-            out.println("<input type=\"submit\" name=\"btnSubmit\">\n");
-            out.println("</form>\n");
+            out.println("<h1>Servlet UpdateResult at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {

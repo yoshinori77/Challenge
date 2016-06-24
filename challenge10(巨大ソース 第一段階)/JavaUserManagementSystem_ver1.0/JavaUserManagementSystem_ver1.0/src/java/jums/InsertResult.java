@@ -1,21 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package jums;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author yoshi
+ * insertresultと対応するサーブレット
+ * フォームから入力された値をセッション経由で受け取り、データベースにinsertする
+ * 直接アクセスした場合はerror.jspに振り分け
+ * @author hayashi-s
  */
-public class jdbc_kadai11 extends HttpServlet {
+public class InsertResult extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,27 +28,28 @@ public class jdbc_kadai11 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            // 課題11
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>jdbc 課題11</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println(" <form action=\"./jdbc_kadai11.jsp\" method=\"post\">\n");
-            out.println("<br>" + "ID: " + "<p><input type=\"text\" name=\"txtID\"></p>\n");
-            out.println("<br>" + "名前: " + "<p><input type=\"text\" name=\"txtName\"></p>\n");
-            out.println("<br>" + "tell: " + "<p><input type=\"text\" name=\"txtTell\"></p>\n");
-            out.println("<br>" + "年齢: " + "<p><input type=\"text\" name=\"txtAge\"></p>\n");
-            out.println("<br>" + "誕生日: " + "<p><input type=\"text\" name=\"txtBirthday\"></p>\n");
-            out.println("<input type=\"submit\" name=\"btnSubmit\" value=\"更新\">\n");
-            out.println("</form>\n");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+        
+        //セッションスタート
+        HttpSession session = request.getSession();
+        
+        try{
+            //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
+            UserDataDTO userdata = new UserDataDTO();
+            userdata.setName((String)session.getAttribute("name"));
+            Calendar birthday = Calendar.getInstance();
+            userdata.setBirthday(birthday.getTime());
+            userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
+            userdata.setTell((String)session.getAttribute("tell"));
+            userdata.setComment((String)session.getAttribute("comment"));
+            
+            //DBへデータの挿入
+            UserDataDAO .getInstance().insert(userdata);
+            
+            request.getRequestDispatcher("/insertresult.jsp").forward(request, response);
+        }catch(Exception e){
+            //データ挿入に失敗したらエラーページにエラー文を渡して表示
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 
