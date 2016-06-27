@@ -26,14 +26,14 @@ public class Insert extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-        HttpSession session = request.getSession();
-        session.setAttribute("ac", (int) (Math.random() * 1000));
-        request.getRequestDispatcher("/insert.jsp").forward(request, response);   
-    }catch(Exception e){
-        request.setAttribute("error",e.getMessage());
-        request.getRequestDispatcher("/error.jsp").forward(request, response);   
+            HttpSession session = request.getSession();
+            session.setAttribute("ac", (int) (Math.random() * 1000));
+            request.getRequestDispatcher("/insert.jsp").forward(request, response);   
+        }catch(Exception e){
+            request.setAttribute("error",e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);   
         
-    }
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -2,6 +2,7 @@ package jums;
 
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -45,7 +46,6 @@ public class InsertConfirm extends HttpServlet {
             String type = request.getParameter("type");
             String tell = request.getParameter("tell");
             String comment = request.getParameter("comment");
-            String birthday = request.getParameter("year")+request.getParameter("month")+request.getParameter("day");
             
             // UserDataBeansにデータを格納
             // セッターを呼ぶ
@@ -54,10 +54,10 @@ public class InsertConfirm extends HttpServlet {
             udb.setYear(year);
             udb.setMonth(month);
             udb.setDay(day);
-            // 職業の値が空の場合、ゼロとする
+            // 職業の値が空の場合、文字列で1とする
             // 空文字をintに変換するとnullエラーになるため
             if (type.equals("")) {
-                type = "0";
+                type = "1";
                 udb.setType(Integer.parseInt(type));
             } else {
                 udb.setType(Integer.parseInt(type));
@@ -67,9 +67,25 @@ public class InsertConfirm extends HttpServlet {
 
 //             setBirthday用
 //             パース 
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-//            Date sbirthday = sdf.parse(birthday);
-//            udb.setBirthday(sbirthday);
+            if (year.equals("") || month.equals("") || day.equals("")) {
+            } else {
+                int p_month = Integer.parseInt(month);
+                int p_day = Integer.parseInt(day);
+                // 月と日が一桁の場合、先頭に0を挿入
+                //　e.g. 2016年1月1日の場合 201611 → 20160101
+                if (p_month <10) {
+                    StringBuilder sb = new StringBuilder(month);
+                    month = sb.insert(0, "0").toString();
+                }
+                if (p_day < 10) {
+                    StringBuilder sb = new StringBuilder(day);
+                    day = sb.insert(0, "0").toString();
+                }
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date p_birthday = sdf.parse(year + "-" + month + "-" + day);
+                udb.setBirthday(p_birthday);
+            }
+            
             
             //セッションに格納
             session.setAttribute("udb", udb);

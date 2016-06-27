@@ -2,6 +2,7 @@
 <%@page import="jums.JumsHelper"%>
 <%@page import="javax.servlet.http.HttpSession" %>
 <%
+    // セッションに格納したudbオブジェクトを取得
     HttpSession hs = request.getSession();
     UserDataBeans udb = (UserDataBeans) hs.getAttribute("udb");
 %>
@@ -13,13 +14,9 @@
         <title>JUMS登録確認画面</title>
     </head>
     <body>
-<!--        nullあるいはフォームが全て空欄の場合には
-        登録できない-->
-        <% if (udb == null || udb.getName().equals("") && udb.getYear().equals("")  && udb.getMonth().equals("") && udb.getDay().equals("") && udb.getType() == 0 && udb.getTell().equals("") && udb.getComment().equals("")) { %>
+        <!--入力欄が全て空の場合-->
+        <% if (udb == null || udb.getName().equals("") && udb.getYear().equals("")  && udb.getMonth().equals("") && udb.getDay().equals("") && udb.getTell().equals("") && udb.getComment().equals("")) { %>
             <h1>入力値が不正です</h1>
-        <!--フォームの一部が空欄の場合も登録できない
-          それぞれのタグ毎に空欄の警告を出すために、if文を羅列した
-          TODO  冗長な記述になってしまったので、改善策があれば修正-->
         <% } else { %>
             <% if(udb.getName().equals("")) { %>
                 <h1>名前が空欄です</h1>
@@ -36,15 +33,13 @@
             <% if (udb.getComment().equals("")) { %>
                 <h1>自己紹介文が空欄です</h1>
             <% } %>
-            <!--全てのフォームに値が入っている場合のみ登録可能-->
-            <% if (!udb.getName().equals("") && !udb.getYear().equals("")  && !udb.getMonth().equals("") && !udb.getDay().equals("") && udb.getType() != 0 && !udb.getTell().equals("") && !udb.getComment().equals("")) { %>
+            <!-- 全ての項目を埋めた場合-->
+            <% if (!udb.getName().equals("") && !udb.getYear().equals("")  && !udb.getMonth().equals("") && !udb.getDay().equals("") && !udb.getTell().equals("") && !udb.getComment().equals("")) { %>
             <h1>登録確認</h1>
             名前:<%= udb.getName()%><br>
             生年月日:<%= udb.getYear()+"年"+udb.getMonth()+"月"+udb.getDay()+"日"%><br>
-            
+            <!--getType()で取得したint型の返り値をswitch文で条件分岐-->
             種別:<%
-                // 種別はradioボタン、変数がint
-                // 直接表示できないので、switch文で表示させる
                 int num = udb.getType(); String message = "  ";
                 switch(num) {
                     case 1:

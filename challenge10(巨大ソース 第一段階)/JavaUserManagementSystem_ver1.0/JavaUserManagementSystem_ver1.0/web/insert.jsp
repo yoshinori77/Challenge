@@ -71,11 +71,7 @@
 
         種別:
         <br>
-        <% if (udb == null || udb.getType() == 0) { %>
-            <input type="radio" name="type" value="1">エンジニア<br>
-            <input type="radio" name="type" value="2">営業<br>
-            <input type="radio" name="type" value="3">その他<br>
-        <% } else if (udb.getType() == 1) { %>
+        <% if (udb == null || udb.getType() == 1) { %>
             <input type="radio" name="type" value="1" checked="checked">エンジニア<br>
             <input type="radio" name="type" value="2">営業<br>
             <input type="radio" name="type" value="3">その他<br>
