@@ -110,6 +110,8 @@ public class UserDataBeans implements Serializable{
         }
     }
     
+    // monthが10より小さければ、数字の前に0を追加
+    // 文字列に変換
     public String parseMonth(int month) {
         String p_month = "";
         if (this.month < 10) {
@@ -121,6 +123,8 @@ public class UserDataBeans implements Serializable{
         return p_month;
     }
     
+    // dayが10より小さければ、数字の前に0を追加
+    // 文字列に変換
     public String parseDay(int day) {
         String p_day = "";
         if (this.day < 10) {
@@ -159,20 +163,7 @@ public class UserDataBeans implements Serializable{
         return chkList;
     }
     
-    public ArrayList<String> srcproperties(){
-        ArrayList<String> srcList = new ArrayList<String>();
-        if(this.name.equals("")){
-            srcList.add("name");
-        }
-        if(this.year == 0){
-            srcList.add("year");
-        }
-        if(this.type == 0){
-            srcList.add("type");
-        }
-        return srcList;
-    }
-
+    // UserDataBeansの各パラメータをDTOにセット
     public void UD2DTOMapping(UserDataDTO udd){
         udd.setName(this.name);
         if(this.year != 0 || this.month != 0 || this.day != 0){
@@ -191,6 +182,7 @@ public class UserDataBeans implements Serializable{
         udd.setComment(this.comment);
     }
     
+    // DTOの各パラメータをUserDataBeansにセット
     public void DTO2UDMapping(UserDataDTO udd) {
         this.name = udd.getName();
         this.year = Integer.parseInt(udd.getBirthday().toString().substring(0,4));
@@ -202,18 +194,21 @@ public class UserDataBeans implements Serializable{
         
     }
     
+    // Date型のnewDateを文字列に変換
     public String parseNewDate(Date newDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String sNewDate = sdf.format(newDate);
         return sNewDate;
     }
     
+    // // Date型のbirthdayを文字列に変換
     public String parseBirthday(Date birthday) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String sBirthday = sdf.format(birthday);
         return sBirthday;
     }
     
+    // int型のtypeを受け取って評価し、文字列のmessageを返す
     public String showType(int type) {
         String message = "";
         switch(type) {

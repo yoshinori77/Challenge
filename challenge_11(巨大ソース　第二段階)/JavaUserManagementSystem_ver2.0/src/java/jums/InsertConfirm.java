@@ -27,19 +27,19 @@ public class InsertConfirm extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //セッションスタート
+        // セッションのインスタンスを生成
         HttpSession session = request.getSession();
         
         try{
-            request.setCharacterEncoding("UTF-8");//リクエストパラメータの文字コードをUTF-8に変更
+            request.setCharacterEncoding("UTF-8");
             
-            //アクセスルートチェック
+            // アクセスルートチェック
             String accesschk = request.getParameter("ac");
             if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
                 throw new Exception("不正なアクセスです");
             }
             
-            //フォームからの入力を取得して、JavaBeansに格納
+            // フォームからの各パラメータを取得して、JavaBeansに格納
             UserDataBeans udb = new UserDataBeans();
             udb.setName(request.getParameter("name"));
             udb.setYear(request.getParameter("year"));
@@ -49,7 +49,7 @@ public class InsertConfirm extends HttpServlet {
             udb.setTell(request.getParameter("tell"));
             udb.setComment(request.getParameter("comment"));
 
-            //ユーザー情報群をセッションに格納
+            //ユーザーデータをセッションに格納
             session.setAttribute("udb", udb);
             System.out.println("Session updated!!");
             

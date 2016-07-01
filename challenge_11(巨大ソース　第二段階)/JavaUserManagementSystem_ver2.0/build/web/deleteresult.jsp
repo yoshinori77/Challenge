@@ -15,6 +15,7 @@
     <h1>削除確認</h1>
     削除しました。<br>
     
+    <!--TODO 検索結果画面に戻るはエラーになるので修正-->
     <form action="SearchResult" method="POST">
         <input type="hidden" name="ac"  value="<%= request.getAttribute("ac")%>">
         <input type="submit" name="no" value="検索結果画面に戻る">

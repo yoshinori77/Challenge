@@ -63,12 +63,12 @@ public class UpdateResult extends HttpServlet {
             
             Integer ac = (Integer)session.getAttribute("ac");
             
-            //セッションの値を削除
+            //セッションクリア
             if (session != null) {
                 session.invalidate();
             }
             
-            //結果画面での表示用に入力パラメータ―をリクエストスコープに保存
+            //パラメータをRequestスコープに格納
             request.setAttribute("udb", udb);
             request.setAttribute("ac", ac);
             request.getRequestDispatcher("/updateresult.jsp").forward(request, response);

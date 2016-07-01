@@ -28,7 +28,6 @@ public class Delete extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         //セッションスタート
         HttpSession session = request.getSession();
         try {

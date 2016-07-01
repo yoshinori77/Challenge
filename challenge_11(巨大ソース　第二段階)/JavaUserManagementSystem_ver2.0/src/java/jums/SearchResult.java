@@ -41,6 +41,7 @@ public class SearchResult extends HttpServlet {
             }
         
             //フォームからの入力を取得して、JavaBeansに格納
+            // 戻るボタンをクリックした場合にエラーが生じないように条件分岐
             UserDataBeans udb = new UserDataBeans();
             if(request.getParameter("back")==null){
                 udb.setName(request.getParameter("name"));
@@ -52,7 +53,7 @@ public class SearchResult extends HttpServlet {
             UserDataDTO searchData = new UserDataDTO();
             udb.UD2DTOMapping(searchData);
             
-
+            // select文を実行
             ArrayList<UserDataDTO> resultData = UserDataDAO .getInstance().search(searchData);
             request.setAttribute("resultData", resultData);
             session.setAttribute("udb", udb);

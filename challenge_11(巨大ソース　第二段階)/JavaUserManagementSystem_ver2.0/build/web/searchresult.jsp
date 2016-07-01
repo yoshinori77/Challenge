@@ -25,7 +25,9 @@
                 <th>種別</th>
                 <th>登録日</th>
             </tr>
-
+            
+            <!--memberListにはselect文でヒットしたユーザーのデータを格納-->
+            <!--memberListの各要素はDTOオブジェクトなのでメソッドを使用-->
             <% for (int i=0; i<memberList.size(); i++) { %>
                 <tr>
                     <td width="100" height="20" align="center"><a href="ResultDetail?id=<%= memberList.get(i).getUserID()%>&ac=<%= hs.getAttribute("ac")%>"><%= memberList.get(i).getName()%></a></td>

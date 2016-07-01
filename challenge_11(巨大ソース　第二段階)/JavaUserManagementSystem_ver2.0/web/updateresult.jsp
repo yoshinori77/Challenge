@@ -6,8 +6,9 @@
 <%
     JumsHelper jh = JumsHelper.getInstance();
     UserDataBeans udb = (UserDataBeans) request.getAttribute("udb");
-    Integer ac = (Integer)request.getAttribute("ac");
     HttpSession hs = request.getSession();
+    // リクエストスコープからパラメータを取得してセッションにセット(詳細画面に戻る用)
+    Integer ac = (Integer)request.getAttribute("ac");
     hs.setAttribute("ac", ac);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,7 +30,8 @@
                 </tr>
                 <tr>
                     <td width="100" align="center" bgcolor="#eeeeee"><%= udb.getName()%></td>
-                    <td width="100" align="center"><%= udb.getYear()+"-"+udb.parseMonth(udb.getMonth())+"-"+udb.parseDay(udb.getDay())%></td>
+                    <!--parseMonthとparseDayメソッドは文字列に変換して、月と日が10より小さければ0をつける(2016-1-1 → 2016-01-01)-->
+                    <td width="100" align="center"><%= udb.getYear()+"-"+udb.parseMonth(udb.getMonth())+"-"+udb.parseDay(udb.getDay())%>
                     <td width="100" align="center" bgcolor="#eeeeee"><%= jh.exTypenum(udb.getType())%></td>
                     <td width="200" align="center"><%= udb.getTell()%></td>
                     <td width="200" align="center" bgcolor="#eeeeee"><%= udb.getComment()%></td>

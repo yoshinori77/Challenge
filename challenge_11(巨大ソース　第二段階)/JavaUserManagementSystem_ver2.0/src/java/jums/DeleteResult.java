@@ -28,7 +28,6 @@ public class DeleteResult extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         
         //セッションスタート
         HttpSession session = request.getSession();
@@ -40,13 +39,10 @@ public class DeleteResult extends HttpServlet {
             if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
                 throw new Exception("不正なアクセスです");
             }
-            //セッションからパラメータを取得
             UserDataDTO udd = (UserDataDTO)session.getAttribute("resultData");
             
-            //DTOオブジェクトにマッピング。DB専用のパラメータに変換。
+            //DTOオブジェクトにパラメータをセット
             UserDataDTO userdata = (UserDataDTO)session.getAttribute("resultData");
-            
-            //userIDをDTOにセット
             userdata.setUserID(udd.getUserID());
             
             //DBのデータを更新

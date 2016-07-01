@@ -40,18 +40,19 @@ public class ResultDetail extends HttpServlet {
                 throw new Exception("不正なアクセスです");
             }
 
-            //TODO DBから取得したUserIDをセットしたい
+            //DTOオブジェクトにパラメータをセット
             UserDataDTO searchData = new UserDataDTO();
             UserDataBeans udb = new UserDataBeans();
             udb.UD2DTOMapping(searchData);
+            // 戻るボタンをクリックした場合に、nullエラーを回避
             if (request.getParameter("back") == null) {
                 searchData.setUserID(Integer.parseInt(request.getParameter("id")));
-                //DTOオブジェクトにマッピング。DB専用のパラメータに変換
                 UserDataDTO resultData = UserDataDAO .getInstance().searchByID(searchData);
                 session.setAttribute("resultData", resultData);
                 session.setAttribute("udb", udb);
             }
             
+            // 戻るボタンをクリックした場合だけ、Requestスコープにセット
             if (request.getParameter("back") != null) {
                 request.setAttribute("back", request.getParameter("back"));
                 request.setAttribute("udb", request.getParameter("udb"));

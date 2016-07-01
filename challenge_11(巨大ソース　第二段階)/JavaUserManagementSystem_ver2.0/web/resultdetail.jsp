@@ -5,7 +5,11 @@
     JumsHelper jh = JumsHelper.getInstance();
     UserDataBeans udb = (UserDataBeans) session.getAttribute("udb");
     UserDataDTO udd = (UserDataDTO)session.getAttribute("resultData");
-    UserDataBeans udb2 = (UserDataBeans) request.getAttribute("udb");
+    UserDataBeans udb2 = null;
+    // 戻るボタンをクリックした場合に値をセット
+    if (request.getAttribute("back") != null) {
+        udb2 = (UserDataBeans) request.getAttribute("udb");
+    }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,6 +21,7 @@
     <body>
         <form action="Update" method="POST">
             <h1>詳細情報</h1>
+            <!--researchresultから画面遷移した場合-->
             <% if (request.getAttribute("back") == null) { %>
                 <table border=1 >
                     <tr>
@@ -38,6 +43,7 @@
                         <td name="newDate" width="100" align="center"><%= udb.parseNewDate(udd.getNewDate())%></td>
                     </tr>
                 </table><br>
+            <!--戻るボタンをクリックした場合-->
             <% } else { %>
                 <table border=1 >
                     <tr>

@@ -6,6 +6,7 @@
     HttpSession hs = request.getSession();
     UserDataBeans udb = null;
     boolean reinput = false;
+    // 戻るボタンからフォームされた場合
     if(request.getParameter("mode") != null && request.getParameter("mode").equals("REINPUT")){
         reinput = true;
         udb = (UserDataBeans)hs.getAttribute("udb"); 
