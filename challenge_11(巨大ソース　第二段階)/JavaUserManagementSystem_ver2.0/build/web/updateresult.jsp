@@ -39,6 +39,7 @@
         以上の内容で登録しました。<br><br>
         
         <form action="ResultDetail" method="POST">
+            <input type="hidden" name="udb"  value="<%= request.getAttribute("udb")%>">
             <input type="hidden" name="ac"  value="<%= request.getAttribute("ac")%>">
             <input type="hidden" name="back" value="BACK">
             <input type="submit" name="no" value="詳細画面へ戻る">

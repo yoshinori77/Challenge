@@ -52,6 +52,11 @@ public class ResultDetail extends HttpServlet {
                 session.setAttribute("udb", udb);
             }
             
+            if (request.getParameter("back") != null) {
+                request.setAttribute("back", request.getParameter("back"));
+                request.setAttribute("udb", request.getParameter("udb"));
+            }
+            
             request.getRequestDispatcher("/resultdetail.jsp").forward(request, response);
         }catch(Exception e){
             //何らかの理由で失敗したらエラーページにエラー文を渡して表示。想定は不正なアクセスとDBエラー
